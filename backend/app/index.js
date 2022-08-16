@@ -5,7 +5,7 @@ const app = express();
 const models = require('./models')
 
 // Import routes
-const enrollRoutes = require('./routes/enroll-routes');
+const studentRoutes = require('./routes/student-routes');
 
 app.use(
   bodyParser.json({ limit: '50mb', extended: true }),
@@ -14,7 +14,7 @@ app.use(
   })
 )
 
-app.use('/enroll', enrollRoutes)
+app.use('/api', studentRoutes)
 
 models.sequelize.sync()
 
