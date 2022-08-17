@@ -12,7 +12,7 @@ module.exports = (sequelize, DataTypes) => {
         name: {
           type: DataTypes.STRING(100),
           allowNull: false,
-          field: 'nome'
+          field: 'name'
         },
         cpf: {
           type: DataTypes.STRING(11),
@@ -36,12 +36,17 @@ module.exports = (sequelize, DataTypes) => {
         },
         state: {
             type: DataTypes.INTEGER,
+            allowNull: false,
             field: 'state'
         },
         city: {
             type: DataTypes.INTEGER,
+            allowNull: false,
             field: 'city'
         },
+      },
+      {
+        initialAutoIncrement: 100000
       },
       {
         tableName: 'student',
@@ -56,3 +61,5 @@ module.exports = (sequelize, DataTypes) => {
   
     return student;
   }
+
+  
