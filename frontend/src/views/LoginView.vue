@@ -26,6 +26,7 @@
                   hide-details
                   label="Senha"
                   type="password"
+                  @keyup.enter="login"
                   v-model="password">
                 </v-text-field>
               </v-form>
@@ -70,13 +71,16 @@ export default {
   }),
   methods: {
     login() {
-      const baseURI = 'https://jsonplaceholder.typicode.com/users'
-      this.$axios.get(baseURI)
+      this.$axios.post(this.$store.state.apiURL + '/api/login', {username: this.username, password: this.password})
       .then((result) => {
-        this.users = result.data
+        if (result.data) {
+          this.$router.push("home");
+        }
+      }).catch(e => {
+        this.$store.state.mainLayout.openSnackbar(e.response.data.error)
       })
     }
-  }
+  },
 };
 </script>
 

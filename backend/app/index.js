@@ -6,6 +6,7 @@ const models = require('./models')
 
 // Import routes
 const studentRoutes = require('./routes/student-routes');
+const authRoutes = require('./routes/auth-routes');
 
 app.use(
   bodyParser.json({ limit: '50mb', extended: true }),
@@ -15,6 +16,7 @@ app.use(
 )
 
 app.use('/api', studentRoutes)
+app.use('/api', authRoutes)
 
 models.sequelize.sync()
 
