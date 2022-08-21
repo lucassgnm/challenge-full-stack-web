@@ -5,7 +5,9 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
+    mainLayout: null,
     apiURL: 'http://localhost:3000',
+    userData: null
   },
   getters: {
   },

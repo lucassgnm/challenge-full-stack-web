@@ -6,11 +6,11 @@ const studentRepository = new StudentRepository()
 class StudentController {
   async get(req, res) {
     try {
-        if (await util.isEmpty(req.query)) {
-          res.json(await studentRepository.selectAll());
-        } else {
-          res.json(await studentRepository.selectOne(req.query));
-        }
+      if (await util.isEmpty(req.query)) {
+        res.json(await studentRepository.selectAll());
+      } else {
+        res.json(await studentRepository.selectOne(req.query));
+      }
     } catch (err) {
       // Error response
       let code = err.code ? err.code : 500;

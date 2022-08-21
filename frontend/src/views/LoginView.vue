@@ -74,6 +74,7 @@ export default {
       this.$axios.post(this.$store.state.apiURL + '/api/login', {username: this.username, password: this.password})
       .then((result) => {
         if (result.data) {
+          this.$store.state.userData = result.data;
           this.$router.push("home");
         }
       }).catch(e => {
