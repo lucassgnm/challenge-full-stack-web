@@ -74,7 +74,7 @@ export default {
       this.$axios.post(this.$store.state.apiURL + '/api/login', {username: this.username, password: this.password})
       .then((result) => {
         if (result.data) {
-          this.$store.state.userData = result.data;
+          localStorage.userData = JSON.stringify(result.data);
           this.$router.push("home");
         }
       }).catch(e => {
@@ -82,7 +82,14 @@ export default {
       })
     }
   },
+  created() {
+    localStorage.removeItem('userData');
+  }
 };
 </script>
 
-<style></style>
+<style>
+.container {
+    max-width: 837px;
+}
+</style>

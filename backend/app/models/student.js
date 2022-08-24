@@ -14,10 +14,17 @@ module.exports = (sequelize, DataTypes) => {
           allowNull: false,
           field: 'name'
         },
+        email: {
+          type: DataTypes.STRING(100),
+          allowNull: false,
+          field: 'email',
+          unique: true
+        },
         cpf: {
           type: DataTypes.STRING(11),
           allowNull: false,
-          field: 'cpf'
+          field: 'cpf',
+          unique: true
         },
         cep: {
           type: DataTypes.STRING(8),
@@ -35,12 +42,12 @@ module.exports = (sequelize, DataTypes) => {
           field: 'number'
         },
         state: {
-            type: DataTypes.INTEGER,
+            type: DataTypes.STRING(50),
             allowNull: false,
             field: 'state'
         },
         city: {
-            type: DataTypes.INTEGER,
+            type: DataTypes.STRING(50),
             allowNull: false,
             field: 'city'
         },

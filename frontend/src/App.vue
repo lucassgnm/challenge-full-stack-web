@@ -1,7 +1,20 @@
 <template>
-  <v-app ref="mainLayout">
-    <v-navigation-drawer
-    :class="{ 'pa-3 mt-16': $vuetify.breakpoint.smAndUp }"
+  <v-app>
+    <v-app-bar
+      app
+      class="pl-5"
+      color="#bbb"
+      dark
+    >
+      <div class="d-flex align-center">
+        <img width="60px" :src="logoSVG" />
+      </div>
+      <v-spacer></v-spacer>
+    </v-app-bar>
+
+    <v-navigation-drawer 
+        app
+       :class="{ 'pa-3': $vuetify.breakpoint.smAndUp }"
       v-if="this.$route.name !== 'login'"
       v-model="drawer"
       :mini-variant.sync="mini"
@@ -41,22 +54,7 @@
         </v-list-item>
       </v-list>
     </v-navigation-drawer>
-    <v-app-bar
-      app
-      color="#bbb"
-      dark
-    >
-      <div class="d-flex align-center">
-        <img width="60px" :src="logoSVG" />
-      </div>
 
-      <v-spacer></v-spacer>
-
-    </v-app-bar>
-
-    <v-main>
-      <router-view/>
-    </v-main>
     <v-snackbar
       v-model="snackbar"
     >
@@ -73,6 +71,11 @@
         </v-btn>
       </template>
     </v-snackbar>
+
+    <v-main
+      :class="this.$route.name !== 'login' ? 'ml-10 mt-5' : 'mt-5'">
+      <router-view />
+    </v-main>
   </v-app>
 </template>
 

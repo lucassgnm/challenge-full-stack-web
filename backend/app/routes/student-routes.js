@@ -9,5 +9,6 @@ const studentController = new StudentController();
 
 routes.get('/student', authController.validateToken, studentController.get);
 routes.post('/student', authController.validateToken, studentController.post);
+routes.delete('/student/:ra', authController.validateToken, studentController.delete);
 
 module.exports = routes;

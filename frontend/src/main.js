@@ -6,7 +6,9 @@ import store from './store'
 import vuetify from './plugins/vuetify'
 import 'material-design-icons-iconfont/dist/material-design-icons.css'
 import axios from "axios";
+import { VueMaskDirective } from 'v-mask'
 
+Vue.directive('mask', VueMaskDirective);
 Vue.prototype.$axios = axios;
 Vue.config.productionTip = false
 

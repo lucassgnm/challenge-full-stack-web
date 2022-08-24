@@ -9,7 +9,14 @@ class AuthController {
   async validateToken(req, res, next) {
     try {
       // We can obtain the session token from the requests cookies, which come with every request
-      const token = req.rawHeaders[1].split(' ')[1];
+      let token = '';
+
+      for (let index = 0; index < req.rawHeaders.length; index++) {
+        const element = req.rawHeaders[index];
+        if (element == 'Authorization') {
+          token = req.rawHeaders[index+1].split(' ')[1];
+        }
+      }
 
       // if the cookie is not set, return an unauthorized error
       if (!token) {
@@ -25,6 +32,7 @@ class AuthController {
         payload = jwt.verify(token, process.env.SECRET);
       } catch (e) {
         if (e instanceof jwt.JsonWebTokenError) {
+          console.log(e);
           // if the error thrown is because the JWT is unauthorized, return a 401 error
           return res.status(401).end();
         }
@@ -49,10 +57,17 @@ class AuthController {
     try {
       if (req.body.username && req.body.password) {
         const result = await authRepository.selectOne(req.body);
-        result.dataValues.token = jwt.sign(result.dataValues, process.env.SECRET, {
-          expiresIn: process.env.EXPIRESIN // expires in 5min
-        });
-        res.json(result);
+        if (result) {
+          result.dataValues.token = jwt.sign(result.dataValues, process.env.SECRET, {
+            expiresIn: process.env.EXPIRESIN // expires in 5min
+          });
+          res.json(result);
+        } else {
+          return res.status(400).json({
+            statusCode: 400,
+            error: 'Dados inválidos'
+          });
+        }
       } else {
         return res.status(400).json({
           statusCode: 400,

@@ -14,10 +14,34 @@ class studentRepository {
     });
   }
 
-  async insert(args) {
-      return await models.student.create(args);
-    }
+  async selectOneByCpf(args) {
+    return await models.student.findOne({
+      where: {
+        cpf: args
+      }
+    });
   }
+
+  async selectOneByEmail(args) {
+    return await models.student.findOne({
+      where: {
+        email: args
+      }
+    });
+  }
+
+  async insert(args) {
+    return await models.student.create(args);
+  }
+
+  async delete(args) {
+    return await models.student.destroy({
+      where: {
+        ra: args.ra
+      }
+    });
+  }
+}
   
   module.exports = studentRepository
   
